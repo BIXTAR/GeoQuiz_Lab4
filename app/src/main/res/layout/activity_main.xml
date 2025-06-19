@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Вопрос -->
     <TextView
         android:id="@+id/question_text_view"
         android:layout_width="0dp"
@@ -22,7 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"/>
 
-    <!-- Кнопка True -->
     <Button
         android:id="@+id/true_button"
         android:layout_width="0dp"
@@ -34,7 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/question_text_view" />
 
-    <!-- Кнопка False -->
     <Button
         android:id="@+id/false_button"
         android:layout_width="0dp"
@@ -46,7 +43,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginStart="8dp"/>
 
-    <!-- Кнопка Next -->
+
     <Button
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
