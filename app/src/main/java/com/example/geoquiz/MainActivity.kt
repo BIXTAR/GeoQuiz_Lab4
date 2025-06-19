@@ -51,6 +51,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("index", currentIndex)
+        outState.putInt("correct", correctAnswers)
+        outState.putIntegerArrayList("answered", ArrayList(answeredQuestions))
+    }
+
 
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = questionBank[currentIndex].answer
