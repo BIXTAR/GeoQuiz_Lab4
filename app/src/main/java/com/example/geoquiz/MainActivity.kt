@@ -15,9 +15,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nextButton: Button
 
     private val questionBank = listOf(
-        Question(R.string.question_1, true),
+        Question(R.string.question_1, false),
         Question(R.string.question_2, false),
-        Question(R.string.question_3, true)
+        Question(R.string.question_3, true),
+        Question(R.string.question_4, true),
+        Question(R.string.question_5, false)
     )
 
     private var currentIndex = 0

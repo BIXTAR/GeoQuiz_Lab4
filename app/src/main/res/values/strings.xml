@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">GeoQuiz</string>
-    <string name="question_1">Столица Франции — Париж?</string>
-    <string name="question_2">2 + 2 = 5?</string>
-    <string name="question_3">Солнце — это звезда?</string>
+
+    <!-- Географические вопросы -->
+    <string name="question_1">Столица Бразилии — Рио-де-Жанейро?</string>
+    <string name="question_2">Африка — самый большой материк?</string>
+    <string name="question_3">Нил — самая длинная река в мире?</string>
+    <string name="question_4">Австралия — страна и континент?</string>
+    <string name="question_5">Япония находится в Европе?</string>
+
+    <!-- Ответы -->
     <string name="correct_toast">Правильно!</string>
     <string name="incorrect_toast">Неправильно!</string>
 </resources>
