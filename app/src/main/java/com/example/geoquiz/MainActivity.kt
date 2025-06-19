@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var falseButton: Button
     private lateinit var nextButton: Button
 
+    private lateinit var binding: ActivityMainBinding
+    private val quizViewModel: QuizViewModel by viewModels()
+
     private val questionBank = listOf(
         Question(R.string.question_1, false),
         Question(R.string.question_2, false),
