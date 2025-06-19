@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         correctAnswers = savedInstanceState?.getInt("correct") ?: 0
         answeredQuestions = savedInstanceState?.getIntegerArrayList("answered")?.toMutableSet() ?: mutableSetOf()
 
+        updateQuestion()
 
         trueButton.setOnClickListener {
             checkAnswer(true)
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         nextButton.setOnClickListener {
             currentIndex++
+            updateQuestion()
         }
     }
 
@@ -58,6 +60,33 @@ class MainActivity : AppCompatActivity() {
         outState.putIntegerArrayList("answered", ArrayList(answeredQuestions))
     }
 
+    private fun updateQuestion() {
+        questionTextView.setText(questionBank[currentIndex].textResId)
+
+        if (answeredQuestions.contains(currentIndex)) {
+            trueButton.visibility = View.INVISIBLE
+            falseButton.visibility = View.INVISIBLE
+        } else {
+            trueButton.visibility = View.VISIBLE
+            falseButton.visibility = View.VISIBLE
+            trueButton.isEnabled = true
+            falseButton.isEnabled = true
+        }
+
+        if (currentIndex >= questionBank.size - 1) {
+            nextButton.isEnabled = false
+            nextButton.visibility = View.INVISIBLE
+
+            Toast.makeText(
+                this,
+                "Правильных ответов: $correctAnswers из ${questionBank.size}",
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            nextButton.isEnabled = true
+            nextButton.visibility = View.VISIBLE
+        }
+    }
 
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = questionBank[currentIndex].answer
