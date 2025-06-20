@@ -1,37 +1,49 @@
-package com.example.geoquiz.viewmodel
+package com.example.geoquiz
 
 import androidx.lifecycle.ViewModel
-import com.example.geoquiz.R
-import com.example.geoquiz.model.Question
 
-class QuizViewModel : ViewModel() {
-    private val questionBank = listOf(
-        Question(R.string.question_oceans, true),
-        Question(R.string.question_africa, false),
-        Question(R.string.question_americas, true),
-        Question(R.string.question_asia, true),
-        Question(R.string.question_europe, false),
-    )
-
+private const val TAG = "QuizViewModel"
+class QuizViewModel: ViewModel() {
     var currentIndex = 0
-    var correctAnswers = 0
-    val hasAnswered = BooleanArray(questionBank.size) { false }
-    var cheatTokensUsed = 0
+    var isCheater = false
 
-    val currentQuestion: Question
-        get() = questionBank[currentIndex]
+    companion object {
+        var cheatCount: Int = 0 // Счетчик использованных подсказок
+    }
+    //var cheatCount = 0 // Счетчик использованных подсказок
+    private val maxCheatCount = 3  // Максимальное количество подсказок
 
-    val isLastQuestion: Boolean
-        get() = currentIndex == questionBank.size - 1
+    val questionBank = listOf(
+        Question(R.string.question_australia, true),
+        Question(R.string.question_oceans,true),
+        Question(R.string.question_mideast,false),
+        Question(R.string.question_africa,false),
+        Question(R.string.question_americas, true),
+        Question(R.string.question_asia,true))
+
+    val currentQuestionAnswer: Boolean
+        get() = questionBank[currentIndex].answer
+    val currentQuestionText: Int
+        get() = questionBank[currentIndex].textResId
 
     fun moveToNext() {
-        if (currentIndex < questionBank.size - 1) currentIndex++
+        currentIndex = (currentIndex + 1) % questionBank.size
+        isCheater = false  // Сбрасываем статус после переключения на новый вопрос
     }
 
-    fun reset() {
-        currentIndex = 0
-        correctAnswers = 0
-        cheatTokensUsed = 0
-        for (i in hasAnswered.indices) hasAnswered[i] = false
+    fun moveToPrev() {
+        currentIndex = (currentIndex - 1) % questionBank.size
+        isCheater = false  // Сбрасываем статус после переключения на новый вопрос
     }
+
+    fun canUseCheat(): Boolean {
+        return cheatCount < maxCheatCount
+    }
+
+    fun useCheat() {
+        if (canUseCheat()) {
+            cheatCount+=1
+        }
+    }
+
 }
